@@ -6,15 +6,15 @@ nth1_2d(Row, Column, List, Element) :-
     nth1(Column, SubList, Element).
 
 %Checks if point on board is in list
-check_visited(Point, [H|T]) :-
-    Point = H;
-    check_visited(Point, T).
+check_visited(Point, [HP|TP]) :-
+    Point = HP;
+    check_visited(Point, TP).
 
 % Reads a file and retrieves the Board from it.
 load_board(BoardFileName, Board):-
     see(BoardFileName),     % Loads the input-file
     read(Board),            % Reads the first Prolog-term from the file
-    seen.                   % Closes the io-stream
+    seen,                   % Closes the io-stream
 
     %Check wether or not stone exist in position
     nth1_2d(Row, Column, Board, Stone),
@@ -31,7 +31,7 @@ check_alive(Row, Column, Board, Color, Visited):-
     %If 
     %True if position is empty
     (
-        Stone = e,
+        Stone = e;
 
         %Check stone color
         (
